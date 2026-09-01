@@ -7,6 +7,81 @@ Run it: `npm run dev` → http://localhost:4311 (port pinned in `package.json`;
 
 ---
 
+## TODO — before Friday 4 September
+
+Four items stand between the current build and shipping. Ordered by what blocks
+what: the first two are config, the third is a legal requirement, the fourth is
+discoverability.
+
+### 1. Connect the enquiry form  ·  ~15 min  ·  BLOCKING
+
+The form is built and tested end-to-end, but returns a `503` "not connected yet"
+until a provider is configured. Pick one:
+
+- [ ] **Formspree** (fastest) — sign up, create a form, copy the endpoint into
+      `FORMSPREE_ENDPOINT`. No DNS required.
+- [ ] **Resend** (better long-term) — verify `devtom.co` via DNS records, then
+      set `RESEND_API_KEY` and `INQUIRY_FROM`.
+- [ ] Set `INQUIRY_TO` if enquiries should land somewhere other than
+      `hello@devtom.co`.
+- [ ] Verify a real submission arrives in a real inbox — not a mock.
+
+See `.env.example`. On Vercel these go in Project → Settings → Environment
+Variables, not in a committed file.
+
+### 2. Add the Calendly link  ·  ~5 min  ·  BLOCKING
+
+- [ ] Set `NEXT_PUBLIC_CALENDLY_URL` to your scheduling link.
+- [ ] Redeploy — this is a `NEXT_PUBLIC_` variable, so it is inlined at build
+      time and will not take effect until the site rebuilds.
+- [ ] Confirm the popup opens and books a real slot.
+
+Until it is set, the "Schedule a 30-minute call" button does not render at all,
+in both the hero and the contact section.
+
+### 3. Privacy policy page  ·  ~30 min  ·  REQUIRED
+
+The form tells people their message is stored, DevTom d.o.o. is an EU company,
+and every reference site links a policy beneath its form. Nothing exists yet.
+
+- [ ] Write a short honest policy: what is collected (name, email, company,
+      message), why, where it is stored, how long it is kept, and how to request
+      deletion.
+- [ ] Add it at `/privacy` and link it from the form consent line.
+
+Ask and I will draft it — it is a short static page, not a legal project.
+
+### 4. SEO pass  ·  ~45 min  ·  HIGH VALUE
+
+None of this exists yet. All of it is mechanical.
+
+- [ ] `sitemap.xml` — via `app/sitemap.ts`.
+- [ ] `robots.txt` — via `app/robots.ts`.
+- [ ] **JSON-LD** `ProfessionalService` schema: name, Novi Sad address, service
+      area (EU + US), contact point, and `knowsAbout` carrying the stack
+      keywords — TypeScript, React, Angular, Node.js, Next.js, .NET/C#,
+      PostgreSQL, SQL Server, AWS, Docker, CI/CD. This recovers the filtering
+      value lost when the Capabilities section was removed, without putting the
+      chip wall back on the page.
+- [ ] **OG share image** — currently the link previews bare in LinkedIn and
+      Slack, which matters because LinkedIn is where this gets shared. A static
+      `opengraph-image.png`, or generate one from the hero artwork.
+- [ ] Replace the default Next.js favicon.
+
+### Also outstanding, not blocking
+
+- [ ] **Settle the "fifteen years" claim** — appears in `Hero.tsx:39`,
+      `Industries.tsx:57`, `WhyUs.tsx:10`. LinkedIn shows Dec 2015 onward,
+      which is ~10 years 9 months. Either confirm earlier unlisted work, or
+      change all three.
+- [ ] A testimonial — anonymised by role and sector if the client cannot be
+      named. Still the largest credibility gap on the page.
+- [ ] Hard numbers in the industry descriptions.
+- [ ] A founder block: name, photo, direct email.
+- [ ] Deploy to Vercel and point the `devtom.co` DNS.
+
+---
+
 ## Status
 
 The page is **built, building clean, and verified in a real browser** at 1440px
