@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   DevTom design tokens
+   Warm near-black ground, warm off-white ink, single amber accent.
+   Deliberately single-theme: this is a marketing page, not an app.
+   --------------------------------------------------------------- */
+/* ---------------------------------------------------------------
+   DevTom palette — "Archive"
+   Cool white stock rather than warm cream, deep navy ink rather than
+   black, and one bright signal blue. Boldness is spent on the hero
+   artwork, so the surrounding system stays quiet and disciplined.
+   --------------------------------------------------------------- */
+:root {
+  --background: #ffffff;
+  --surface: #f5f7fa;
+  --surface-2: #edf1f7;
+  --foreground: #0d1b2a;
+  --muted: #556072;
+  --faint: #6b7684;
+  --line: #e3e8ef;
+  --line-bright: #cbd5e2;
+  --accent: #1b4df0;
+  --accent-soft: #4a74f5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-bright: var(--line-bright);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Scroll-reveal: elements start displaced, .is-visible settles them.
+   Added by the IntersectionObserver in <Reveal>. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero settles on load rather than on scroll. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--rise-delay, 0ms);
+}
+
+/* The faint grid behind the hero, drifting slowly upward. */
+@keyframes drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -64px;
+  }
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: drift 24s linear infinite;
+}
+
+/* Underline that draws in from the left on hover. */
+.link-underline {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .rise {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+  .hero-grid {
+    animation: none;
+  }
+}
+
+/* Without JS the IntersectionObserver never runs, which would leave every
+   section below the hero permanently invisible. Show it all instead. */
+@media (scripting: none) {
+  .reveal,
+  .rise {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* Scroll cue in the hero. */
+@keyframes nudge {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  85% {
+    transform: translateY(5px);
+  }
+}
+
+.chevron {
+  animation: nudge 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    animation: none;
+  }
+}
+
+/* Display face carries every heading; Archivo is set tight and heavy so the
+   headings read as stamped rather than typed. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+}
+
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.032em;
+}
