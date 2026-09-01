@@ -70,10 +70,6 @@ None of this exists yet. All of it is mechanical.
 
 ### Also outstanding, not blocking
 
-- [ ] **Settle the "fifteen years" claim** — appears in `Hero.tsx:39`,
-      `Industries.tsx:57`, `WhyUs.tsx:10`. LinkedIn shows Dec 2015 onward,
-      which is ~10 years 9 months. Either confirm earlier unlisted work, or
-      change all three.
 - [ ] A testimonial — anonymised by role and sector if the client cannot be
       named. Still the largest credibility gap on the page.
 - [ ] Hard numbers in the industry descriptions.
@@ -127,11 +123,6 @@ Nothing below can be answered from the code. These are the actual critical path.
 
 ### Decisions
 
-- [ ] **"Fifteen years"** — LinkedIn starts Dec 2015, which is ~10 yrs 9 mos.
-      If there's earlier unlisted work, the claim stands. If not, change it.
-      It appears in **three places**: `Hero.tsx:39`, `Industries.tsx:57`,
-      `WhyUs.tsx:10`.
-      *This is the one line on the page a prospect can check in 30 seconds.*
 - [ ] **HIPAA wording** — you have *experience in* HIPAA-regulated environments.
       You are not HIPAA-certified. Say which phrasing you want and I'll add it as
       text. No badge — see "Claims we're not making".
@@ -227,6 +218,11 @@ first money. No obviously right answer; it's a bet on which segment you want.
 
 ## Decided
 
+- **"Fifteen years" is accurate — keep it.** Confirmed 1 Sep. LinkedIn shows
+  employment from Dec 2015, but there are freelance years preceding it that are
+  not listed on the profile. No change needed in `Hero.tsx`, `Industries.tsx`
+  or `WhyUs.tsx`. Noted here so the discrepancy is not re-raised: anyone
+  comparing the site to the LinkedIn profile is missing the freelance period.
 - **Never name clients.** Confirmed 1 Sep. No company name appears anywhere in
   `src/` — the site sells industry experience instead, with an explicit
   "client names withheld under confidentiality, happy to talk specifics under
