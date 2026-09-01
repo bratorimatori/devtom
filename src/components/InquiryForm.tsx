@@ -151,7 +151,14 @@ export default function InquiryForm() {
       <p className="mt-4 text-xs leading-relaxed text-faint">
         By submitting this form you consent to your message being stored and
         used to respond to your enquiry. It will not be added to a mailing list
-        or shared with third parties.
+        or shared with third parties. See our{" "}
+        <a
+          href="/privacy"
+          className="text-muted underline underline-offset-2 transition-colors hover:text-accent"
+        >
+          privacy policy
+        </a>
+        .
       </p>
     </form>
   );

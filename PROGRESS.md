@@ -9,9 +9,8 @@ Run it: `npm run dev` → http://localhost:4311 (port pinned in `package.json`;
 
 ## TODO — before Friday 4 September
 
-Four items stand between the current build and shipping. Ordered by what blocks
-what: the first two are config, the third is a legal requirement, the fourth is
-discoverability.
+**Items 3 and 4 are done.** What remains is the two config items below, both of
+which need a credential only you can create.
 
 ### 1. Connect the enquiry form  ·  ~15 min  ·  BLOCKING
 
@@ -39,34 +38,29 @@ Variables, not in a committed file.
 Until it is set, the "Schedule a 30-minute call" button does not render at all,
 in both the hero and the contact section.
 
-### 3. Privacy policy page  ·  ~30 min  ·  REQUIRED
+### 3. Privacy policy page  ·  DONE
 
-The form tells people their message is stored, DevTom d.o.o. is an EU company,
-and every reference site links a policy beneath its form. Nothing exists yet.
+- [x] `/privacy` written and prerendered — who is responsible, what is
+      collected, why, where it goes, retention, and your rights.
+- [x] Linked from the form consent line and the footer.
+- [ ] Read it once and confirm the retention periods match what you actually
+      intend (12 months for dead enquiries; contract term plus accounting law
+      for live ones). Those are sensible defaults, not legal advice.
 
-- [ ] Write a short honest policy: what is collected (name, email, company,
-      message), why, where it is stored, how long it is kept, and how to request
-      deletion.
-- [ ] Add it at `/privacy` and link it from the form consent line.
+### 4. SEO pass  ·  DONE
 
-Ask and I will draft it — it is a short static page, not a legal project.
-
-### 4. SEO pass  ·  ~45 min  ·  HIGH VALUE
-
-None of this exists yet. All of it is mechanical.
-
-- [ ] `sitemap.xml` — via `app/sitemap.ts`.
-- [ ] `robots.txt` — via `app/robots.ts`.
-- [ ] **JSON-LD** `ProfessionalService` schema: name, Novi Sad address, service
-      area (EU + US), contact point, and `knowsAbout` carrying the stack
-      keywords — TypeScript, React, Angular, Node.js, Next.js, .NET/C#,
-      PostgreSQL, SQL Server, AWS, Docker, CI/CD. This recovers the filtering
-      value lost when the Capabilities section was removed, without putting the
-      chip wall back on the page.
-- [ ] **OG share image** — currently the link previews bare in LinkedIn and
-      Slack, which matters because LinkedIn is where this gets shared. A static
-      `opengraph-image.png`, or generate one from the hero artwork.
-- [ ] Replace the default Next.js favicon.
+- [x] `sitemap.xml` via `app/sitemap.ts` — both routes, verified serving.
+- [x] `robots.txt` via `app/robots.ts` — allows all, disallows `/api/`,
+      points at the sitemap.
+- [x] **JSON-LD** `ProfessionalService` — Novi Sad address, EU/US/Serbia service
+      area, 5 service offers, and `knowsAbout` carrying 21 terms including the
+      full stack. This is where the Capabilities keywords went.
+- [x] **OG + Twitter share image**, generated at build from the Append-Only
+      motif. Headline matches the H1.
+- [x] Favicon replaced with the ledger mark (`app/icon.svg`); the default
+      Next.js `favicon.ico` is deleted.
+- [ ] After deploying, run the live URL through Google Rich Results Test and
+      paste it into LinkedIn to confirm the card renders.
 
 ### Also outstanding, not blocking
 
@@ -161,16 +155,11 @@ Nothing below can be answered from the code. These are the actual critical path.
 
 ## To build
 
-- [ ] Recover the stack keywords lost with the Capabilities section — put
-      TypeScript / React / Angular / Node / Next.js / .NET / PostgreSQL / AWS /
-      Docker into JSON-LD `knowsAbout` and the meta description instead, so the
-      filtering value survives without the on-page list
 
 - [ ] Wire the form provider once credentials exist (config only, no code change)
 - [ ] Add Calendly URL (config only)
 - [ ] Testimonial component — once there's a quote to put in it (anonymised
       by role and sector if the client can't be named)
-- [ ] `/privacy` page, linked from the form consent line
 - [ ] Founder block near contact — photo, name, direct email
 - [ ] `favicon` / OG share image (currently the Next.js default favicon)
 - [ ] Deploy to Vercel + point devtom.co DNS

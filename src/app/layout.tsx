@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import StructuredData from "@/components/StructuredData";
 import "./globals.css";
 
 /* Type is grounded in the subject: the archive and the audit trail.
@@ -54,7 +55,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <StructuredData />
+        {children}
+      </body>
     </html>
   );
 }

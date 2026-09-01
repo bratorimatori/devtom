@@ -5,7 +5,15 @@ export default function Footer() {
         <p className="font-mono text-xs tracking-[0.14em] uppercase">
           DevTom d.o.o. &middot; Novi Sad, Serbia
         </p>
-        <p>Working with clients across the EU and US</p>
+        <div className="flex items-center gap-6">
+          <p>Working with clients across the EU and US</p>
+          <a
+            href="/privacy"
+            className="link-underline transition-colors hover:text-accent"
+          >
+            Privacy
+          </a>
+        </div>
       </div>
     </footer>
   );
