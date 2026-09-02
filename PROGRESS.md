@@ -68,7 +68,7 @@ in both the hero and the contact section.
       named. Still the largest credibility gap on the page.
 - [ ] Hard numbers in the industry descriptions.
 - [ ] A founder block: name, photo, direct email.
-- [ ] Deploy to Vercel and point the `devtom.co` DNS.
+- [ ] Deploy to Vercel and point the `devtom.co` DNS — steps in [`DEPLOY.md`](DEPLOY.md).
 
 ---
 

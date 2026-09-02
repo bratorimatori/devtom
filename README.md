@@ -50,6 +50,10 @@ every mark after that is permanent, and entries found to be wrong are annotated
 alongside rather than overwritten. The design rationale is in
 [`design/APPEND-ONLY.md`](design/APPEND-ONLY.md).
 
+## Deploying
+
+Vercel plus GoDaddy DNS, step by step, in [`DEPLOY.md`](DEPLOY.md).
+
 ## Project status
 
 Open decisions, outstanding inputs and the pre-launch checklist live in
