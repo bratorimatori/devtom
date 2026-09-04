@@ -66,6 +66,29 @@ export async function POST(request: Request) {
   const resendKey = process.env.RESEND_API_KEY;
   const formspree = process.env.FORMSPREE_ENDPOINT;
 
+  // Misconfiguration should name itself. Handing an email address to fetch()
+  // throws ERR_INVALID_URL deep in the stack, which tells an operator nothing.
+  if (formspree && !URL.canParse(formspree)) {
+    console.error(
+      `FORMSPREE_ENDPOINT is not a URL. Expected https://formspree.io/f/xxxxxxxx ` +
+        `(the endpoint from the form's Integration tab), got: ${formspree}. ` +
+        `The destination email address is configured inside Formspree, not here.`,
+    );
+    return NextResponse.json(
+      { error: "The contact form is misconfigured. Please email hello@devtom.co." },
+      { status: 503 },
+    );
+  }
+  if (resendKey && !resendKey.startsWith("re_")) {
+    console.error(
+      `RESEND_API_KEY does not look like a Resend key (expected a re_ prefix).`,
+    );
+    return NextResponse.json(
+      { error: "The contact form is misconfigured. Please email hello@devtom.co." },
+      { status: 503 },
+    );
+  }
+
   try {
     if (resendKey) {
       const response = await fetch("https://api.resend.com/emails", {
