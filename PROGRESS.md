@@ -15,13 +15,26 @@ Run locally: `npm run dev` → http://localhost:4311
       `www.` gets a browser security warning instead of the site. DNS is
       already correct — the CNAME at GoDaddy needs no change. ~2 min.
 
-- [ ] **Set up mail for `hello@devtom.co`.** The address appears in four
-      places on the site — contact section, form success state, privacy policy,
-      mailto fallback — and currently bounces. `dig devtom.co MX` returns
-      nothing. Use Zoho Mail's free tier: real mailbox, sends *and* receives,
-      needs MX records at GoDaddy. Avoid forwarding-only services; without SMTP
-      you would reply from a Gmail address to someone who wrote to
-      `hello@devtom.co`. ~30 min.
+- [ ] **Set up `hello@devtom.co` on Zoho Mail Lite.** The address appears in
+      four places on the site — contact section, form success state, privacy
+      policy, mailto fallback — and currently bounces. `dig devtom.co MX`
+      returns nothing. ~30 min, mostly waiting on DNS:
+
+      1. Sign up at zoho.com/mail → **Business Email** → buy **Mail Lite**
+         (~€1.13/user/month, billed yearly). Use `224736@gmail.com` as the
+         account contact address — *not* `hello@devtom.co`, which does not
+         exist yet and cannot receive the verification code.
+      2. Add `devtom.co` as the domain and verify ownership with the TXT or
+         CNAME record Zoho supplies.
+      3. Create the mailbox `hello@devtom.co`.
+      4. Add Zoho's **MX**, **SPF** and **DKIM** records at GoDaddy
+         (DNS → Manage Zones). Skipping SPF/DKIM lands your replies in spam.
+      5. **Leave the `A` record on `@` alone** — `216.150.1.1` is the only
+         thing pointing devtom.co at Vercel. Confirm with
+         `dig +short devtom.co` afterwards.
+      6. Test both directions: send to it from Gmail, and reply from it.
+      7. Confirm Mail Lite has IMAP/SMTP enabled, then add the account to
+         whatever mail client you already use.
 
 - [ ] **Fix the Calendly link.** `NEXT_PUBLIC_CALENDLY_URL` is the profile URL,
       so bookers land on a page listing one event and must click it. Change to
@@ -83,6 +96,13 @@ Run locally: `npm run dev` → http://localhost:4311
 - **"Fifteen years" is accurate.** Freelance years precede the Dec 2015
   employment history on LinkedIn. Appears in `Hero.tsx`, `Industries.tsx`,
   `WhyUs.tsx`. Anyone comparing the site to the profile is missing that period.
+- **Zoho Mail Lite over GoDaddy for email.** GoDaddy's Professional Email is
+  Titan, not Microsoft 365, and prices at $23.88 for the first year then
+  **$59.88/year on renewal, per mailbox**. Zoho is ~€14/year flat. The
+  single-console argument (there is already a GoDaddy mailbox on
+  intelligenttools.co) disappears once both accounts sit in one mail client
+  over IMAP. When intelligenttools.co next renews, moving it to Zoho as well
+  would cost ~€28/year against GoDaddy's ~€120.
 - **Never name clients.** No company name appears anywhere in `src/`. The site
   sells industry experience, with "client names withheld under confidentiality,
   happy to talk specifics under NDA" — which turns the anonymity into a signal
