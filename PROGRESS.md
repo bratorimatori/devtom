@@ -89,6 +89,28 @@ Run locally: `npm run dev` → http://localhost:4311
       the CTA that was removed when there was nothing to point at.
 - [ ] **Replace the Formspree free tier** if enquiries exceed 50/month.
 
+- [ ] **Migrate `boki@intelligenttools.co` from GoDaddy/Titan to Zoho** —
+      around **June–July 2027**, six to eight weeks before the GoDaddy renewal
+      (paid August 2026, so it renews ~August 2027; confirm the exact date in
+      GoDaddy → Email & Office). Two Zoho mailboxes cost ~€28/year against
+      GoDaddy's ~€120, and both domains sit in one console.
+
+      The address does not change — it belongs to the domain, not the provider.
+      Order matters, and getting it wrong loses the archive:
+
+      1. Add `intelligenttools.co` as a second domain in the Zoho org, verify it
+      2. Create `boki@intelligenttools.co` — same address, new host
+      3. Run Zoho's **Email Migration** (IMAP) to copy the Titan mailbox across
+      4. Verify the archive arrived: message count, plus a few old threads
+      5. *Then* switch the MX records
+      6. Leave GoDaddy running another week or two — mail in flight during
+         propagation still hits the old server
+      7. Cancel once nothing new has arrived there for several days
+
+      **Leave GoDaddy auto-renew ON until the migration is verified.** Forgetting
+      with it off means the mailbox lapses and the archive may be unrecoverable;
+      forgetting with it on costs $59.88 and nothing else.
+
 ---
 
 ## Decided — do not reopen
