@@ -113,7 +113,19 @@ export async function POST(request: Request) {
       const response = await fetch(formspree, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name, email, company, budget, nda: body.nda, message }),
+        // _subject and _replyto are Formspree conventions: they set the
+        // notification's subject line and make Reply go to the sender rather
+        // than to Formspree. Without them every enquiry arrives looking alike.
+        body: JSON.stringify({
+          _subject: `New enquiry — ${name}${company ? ` (${company})` : ""}`,
+          _replyto: email,
+          name,
+          email,
+          company,
+          budget,
+          nda: body.nda,
+          message,
+        }),
       });
       if (!response.ok) throw new Error(await response.text());
       return NextResponse.json({ ok: true });
