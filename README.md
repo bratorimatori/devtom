@@ -54,7 +54,7 @@ alongside rather than overwritten. The design rationale is in
 
 Vercel plus GoDaddy DNS, step by step, in [`DEPLOY.md`](DEPLOY.md).
 
-## Project status
+## What's next
 
-Open decisions, outstanding inputs and the pre-launch checklist live in
-[`PROGRESS.md`](PROGRESS.md).
+Outstanding actions, settled decisions, and the claims this site deliberately
+does not make: [`PROGRESS.md`](PROGRESS.md).
